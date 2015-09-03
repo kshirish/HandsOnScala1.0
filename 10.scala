@@ -6,7 +6,12 @@ object OopsObject {
 			val publicConstantVar = "Home";
 			private var privateVar = "*****";
 
+			private def privateFunc() {
+				println("You can't see me.");
+			}
+
 			def display(l: Int) {
+				privateFunc();
 				println("Wee");
 			}
 		}
