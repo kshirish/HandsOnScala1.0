@@ -28,6 +28,23 @@ object Functions {
 			println("I am a nothing function.");
 		}
 
+		// function 6: Write functions with `var`
+		var add = (a:Int, b:Int) => (a+b);
+		var bigger = (x:String) => {
+
+			var a = 45;
+			println("is it big enought");
+			println(a);
+			println(x);
+		}
+
+		var empty = () => println("Do not pass me arguments");
+
+		println(add(3,4));
+		bigger("Hmm");
+		empty();
+
+		// map, filter
 		var range = (1 to 5);
 		println(range(1));
 		println(range.map((x: Int) => x*x));
