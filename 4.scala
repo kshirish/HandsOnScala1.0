@@ -15,6 +15,14 @@ object Functions {
 		def g(x: Int) = println(x);
 		g(23);
 
+
+		// function 3
+		// one more notation where a function doesn't return anything
+		// similar to function 5
+		def anotherFunc(x: Int) {
+			println("Input: " + x);
+		}
+	
 		// calling function 3
 		anotherFunc(34);
 
@@ -33,7 +41,7 @@ object Functions {
 		var bigger = (x:String) => {
 
 			var a = 45;
-			println("is it big enought");
+			println("is it big enough");
 			println(a);
 			println(x);
 		}
@@ -74,8 +82,4 @@ object Functions {
 		println(nums.map(x => x + 1).map(x => x * x).map(x => x - 1))
 	}
 
-	// function 3
-	def anotherFunc(x: Int) {
-		println("Input: " + x);
-	}
 }
