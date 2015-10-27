@@ -1,358 +1,358 @@
 // Example 0. Class Inheritance
 
-// class A {
-//   def f() = println("I'm f from A")
-// }
+class A {
+  def f() = println("I'm f from A")
+}
 
-// val a = new A
+val a = new A
 
-// a.f
+a.f
 
-// class AA extends A {
-//   override def f() = println("I'm f from AA")
-// }
+class AA extends A {
+  override def f() = println("I'm f from AA")
+}
 
-// val aa: A = new AA
+val aa: A = new AA
 
-// aa.f
+aa.f
 
-// class AAA extends AA {
-//   override def f() = println("I'm f from AAA")
-// }
+class AAA extends AA {
+  override def f() = println("I'm f from AAA")
+}
 
 
-// val aaa: A = new AAA
+val aaa: A = new AAA
 
-// aaa.f
+aaa.f
 
 // Example 1. Trait
 
-// trait Shape {
+trait Shape {
 	
-// 	def sayIt(): Unit 
+	def sayIt(): Unit 
 
-// 	def attrLength(): Int = {
-// 		return 5
-// 	} 
-// }
+	def attrLength(): Int = {
+		return 5
+	} 
+}
 
-// class Point(xc: Int, yc:Int) extends Shape {
-// 	var x:Int = xc
-// 	var y:Int = yc
+class Point(xc: Int, yc:Int) extends Shape {
+	var x:Int = xc
+	var y:Int = yc
 
-// 	override def sayIt() = {
-// 		println("There, I have said it.")
-// 	}
+	override def sayIt() = {
+		println("There, I have said it.")
+	}
 
-// 	def move(dx: Int, dy:Int) {
-// 		x += dx
-// 		y += dy
-// 	}
+	def move(dx: Int, dy:Int) {
+		x += dx
+		y += dy
+	}
 
-// 	override def toString():String = "(" + x + " -> " + y + ")"
-// }
+	override def toString():String = "(" + x + " -> " + y + ")"
+}
 
-// object Test extends Shape {
-// 	override def sayIt() = {
-// 		println("I am an object.")
-// 	}
-// }
+object Test extends Shape {
+	override def sayIt() = {
+		println("I am an object.")
+	}
+}
 
 
-// var p = new Point(3, 8)
+var p = new Point(3, 8)
 
-// Test.sayIt()
+Test.sayIt()
 
-// p.move(2,4)
-// p.sayIt()
-// println(p.toString())
+p.move(2,4)
+p.sayIt()
+println(p.toString())
 
 // Example 2. Linearisation
 
-// trait A {
-// 	def sayIt() = {
-// 		println("A")
-// 	}
-// }
+trait A {
+	def sayIt() = {
+		println("A")
+	}
+}
 
-// trait X extends A {
-// 	override def sayIt() = {
-// 		println("X")
-// 		super.sayIt()
-// 	}
-// }
+trait X extends A {
+	override def sayIt() = {
+		println("X")
+		super.sayIt()
+	}
+}
 
-// trait Y extends A {
-// 	override def sayIt() = {
-// 		println("Y")
-// 		super.sayIt()
-// 	}
-// }
+trait Y extends A {
+	override def sayIt() = {
+		println("Y")
+		super.sayIt()
+	}
+}
 
-// var x = new AnyRef with X
-// x.sayIt	// X
+var x = new AnyRef with X
+x.sayIt	// X
 
-// var y = new AnyRef with Y
-// y.sayIt	// Y
+var y = new AnyRef with Y
+y.sayIt	// Y
 
-// var xy = new AnyRef with X with Y
-// xy.sayIt	// Y
+var xy = new AnyRef with X with Y
+xy.sayIt	// Y
 
-// var yx = new AnyRef with Y with X
-// yx.sayIt	// X
+var yx = new AnyRef with Y with X
+yx.sayIt	// X
 
 // Example 3. Mixins
 
-// abstract class AbsIterator {
-// 	type T
-// 	def hasNext: Boolean
-// 	def next: T
-// }
+abstract class AbsIterator {
+	type T
+	def hasNext: Boolean
+	def next: T
+}
 
-// trait RichIterator extends AbsIterator {
-// 	def foreach(f: T => Unit) {
-// 		while (hasNext) f(next)
-// 	}
-// }
+trait RichIterator extends AbsIterator {
+	def foreach(f: T => Unit) {
+		while (hasNext) f(next)
+	}
+}
 
-// class StringIterator(s: String) extends AbsIterator {
-// 	type T = Char
-// 	private var counter = 0
-// 	def hasNext = counter < s.length()
-// 	def next: T = {
-// 		val ch = s charAt counter
-// 		counter += 1
-// 		ch		 
-// 	}
-// }
+class StringIterator(s: String) extends AbsIterator {
+	type T = Char
+	private var counter = 0
+	def hasNext = counter < s.length()
+	def next: T = {
+		val ch = s charAt counter
+		counter += 1
+		ch		 
+	}
+}
 
-// class Iter extends StringIterator("HelloWorld") with RichIterator
+class Iter extends StringIterator("HelloWorld") with RichIterator
 
-// var iter = new Iter
-// iter foreach println
+var iter = new Iter
+iter foreach println
 
 
 // Example 4. Anonymous Function
 
-// def sayIt(f:Int => Int) = {
-// 	println("Answer: " + f(3))
-// }
+def sayIt(f:Int => Int) = {
+	println("Answer: " + f(3))
+}
 
 
-// sayIt((x:Int) => {
-// 	println("Anonymous function begins")
-// 	x*x
-// })
+sayIt((x:Int) => {
+	println("Anonymous function begins")
+	x*x
+})
 
 
 // Example 5. Named parameters and default values
 
-// def unitWeight(weight:Double, volume:Double) =  weight/volume
+def unitWeight(weight:Double, volume:Double) =  weight/volume
 
-// unitWeight(400,12)	// order matters
-// unitWeight(weight = 400, volume = 12)	// order doesn't matter
-// unitWeight(volume = 12, weight = 400)	// order doesn't matter
+unitWeight(400,12)	// order matters
+unitWeight(weight = 400, volume = 12)	// order doesn't matter
+unitWeight(volume = 12, weight = 400)	// order doesn't matter
 
-// def unitWeight(weight:Double, volume:Double = 10) =  weight/volume	// assiging default values
-// unitWeight(weight = 400)
+def unitWeight(weight:Double, volume:Double = 10) =  weight/volume	// assiging default values
+unitWeight(weight = 400)
 
 
 
 // Example 6. Anonymous classes
 
 // One way
-// val o = new { 
-// 	val n = 1
-// 	var s = "Hi"
-// 	def f(x:Int) = x + 1
-// }
+val o = new { 
+	val n = 1
+	var s = "Hi"
+	def f(x:Int) = x + 1
+}
 
 // // Other way: anonymous classes can be created as subclasses of other (named) classes
-// class Person {
-// 	private var f = 9
-// 	var name = ""
-// 	var age = 0
-// 	var address = ""
-// }
+class Person {
+	private var f = 9
+	var name = ""
+	var age = 0
+	var address = ""
+}
 
 // the expression below simultaneously defines an anononymous 
 // subclass of Person and creates an instance of it
 // and adds new fields to the superclass
-// val jane = new Person("Jane Doe") {
-// 	age = 19
+val jane = new Person("Jane Doe") {
+	age = 19
 
-// 	val street = "1234 Madison Ave"
-// 	val city = "Coralville"
-// 	address = street + ", " + city
+	val street = "1234 Madison Ave"
+	val city = "Coralville"
+	address = street + ", " + city
 
-// 	def incrementAge {
-// 		age = age + 1
-// 	}
-// }
+	def incrementAge {
+		age = age + 1
+	}
+}
 
 // Alternative to anonymous classes is to use singleton ones
-// object jane extends Person("Jane Doe") {
-// 	age = 19
+object jane extends Person("Jane Doe") {
+	age = 19
 
-// 	val street = "1234 Madison Ave"
-// 	val city = "Coralville"
-// 	address = street + ", " + city
+	val street = "1234 Madison Ave"
+	val city = "Coralville"
+	address = street + ", " + city
 
-// 	def incrementAge {
-// 		age = age + 1
-// 	}
-// }
+	def incrementAge {
+		age = age + 1
+	}
+}
 
 // Example 7. Pattern Matching
 
 
 // Destructuring
-// val t = (1,2,3)
-// val (x1, _, x3) = t // "_" is don't care position
+val t = (1,2,3)
+val (x1, _, x3) = t // "_" is don't care position
 
-// val n = 3
-// val t = n match {
-// 	case 5 => 1
-// 	case 3 => 10
-// 	case _ => 100
-// }
+val n = 3
+val t = n match {
+	case 5 => 1
+	case 3 => 10
+	case _ => 100
+}
 
 // Case classes: Expression evaluation
-// abstract class Expr
+abstract class Expr
 
-// case class Var(name: String) extends Expr
+case class Var(name: String) extends Expr
 
-// case class Number(num: Double) extends Expr
+case class Number(num: Double) extends Expr
 
-// case class UnOp(operator: String, arg: Expr) extends Expr
+case class UnOp(operator: String, arg: Expr) extends Expr
 
-// case class BinOp(operator: String, left: Expr, right: Expr) extends Expr
+case class BinOp(operator: String, left: Expr, right: Expr) extends Expr
 
-// def evaluate(env: Map[String,Double], expr:Expr): Double = expr match {
-// 	case Var(v) => env(v)
-// 	case Number(n) => n
-// 	case UnOp("-", a) => -evaluate(env, a)
-// 	case BinOp("+", l, r) => evaluate(env, l) + evaluate(env, l)
-// 	case BinOp("*", l, r) => evaluate(env, l) * evaluate(env, l)
-// }
+def evaluate(env: Map[String,Double], expr:Expr): Double = expr match {
+	case Var(v) => env(v)
+	case Number(n) => n
+	case UnOp("-", a) => -evaluate(env, a)
+	case BinOp("+", l, r) => evaluate(env, l) + evaluate(env, l)
+	case BinOp("*", l, r) => evaluate(env, l) * evaluate(env, l)
+}
 
-// val env = Map("x" -> 2.0, "y" -> 1.0)
-// val e = UnOp("-", BinOp("*", Var("x"), BinOp("+", Var("y"), Number(3.5))))	// -(x * (y + 3.5))
+val env = Map("x" -> 2.0, "y" -> 1.0)
+val e = UnOp("-", BinOp("*", Var("x"), BinOp("+", Var("y"), Number(3.5))))	// -(x * (y + 3.5))
 
-// evaluate(env, e)
+evaluate(env, e)
 
 // Case classes: Tree
 
-// abstract class Tree
-// case object Empty extends Tree
-// case class Node(value:Int, leftChild:Tree, rightChild: Tree) extends Tree
+abstract class Tree
+case object Empty extends Tree
+case class Node(value:Int, leftChild:Tree, rightChild: Tree) extends Tree
 
-// val empty = Empty
+val empty = Empty
 
-// val t1 = Node(5, empty, Node(7, empty, empty))
+val t1 = Node(5, empty, Node(7, empty, empty))
 
-// val Node(n1, _, _) = t1	// n1: 5
-// val Node(n2, _, Node(n3, _, _)) = t1	// n2: 5, n3: 7
+val Node(n1, _, _) = t1	// n1: 5
+val Node(n2, _, Node(n3, _, _)) = t1	// n2: 5, n3: 7
 
 // Case classes: A List
 
-// abstract class MyList
-// case class NonEmptyList(head:Int, tail: MyList) extends MyList
-// case object EmptyList extends MyList
+abstract class MyList
+case class NonEmptyList(head:Int, tail: MyList) extends MyList
+case object EmptyList extends MyList
 
-// val list = NonEmptyList(3, NonEmptyList(4, NonEmptyList(5,EmptyList)))
+val list = NonEmptyList(3, NonEmptyList(4, NonEmptyList(5,EmptyList)))
 
 // Example 8. Tuple
 
-// var t = (3, 48, 7, 11)
+var t = (3, 48, 7, 11)
 
-// t._2	// 48
-// t._3	// 7
+t._2	// 48
+t._3	// 7
 
-// t.productIterator.foreach {
-// 	i => println("Value: " + i)
-// }
+t.productIterator.foreach {
+	i => println("Value: " + i)
+}
 
 // Example 9. String to Int conversion
 
-// def toInt(s: String): Int = {
-// 	try {
-// 		s.toInt
-// 	} catch {
-// 		case e: Exception => 0
-// 	}
-// }
+def toInt(s: String): Int = {
+	try {
+		s.toInt
+	} catch {
+		case e: Exception => 0
+	}
+}
 
-// toInt("34") // 34
+toInt("34") // 34
 
 // Example 10. Option class 
 
-// def toInt(s: String): Option[Int] = {
-//	try {
-//		Some(s.toInt)
-//	} catch {
-//		case e: Exception => None
-//	}
-// }
+def toInt(s: String): Option[Int] = {
+	try {
+		Some(s.toInt)
+	} catch {
+		case e: Exception => None
+	}
+}
 
-// toInt("34").getOrElse(99)	// 34
-// toInt("3.78").getOrElse(99)	// 99
+toInt("34").getOrElse(99)	// 34
+toInt("3.78").getOrElse(99)	// 99
 
 
 // Example 11. Immutable Lists
 
-// var l = List(1,4,7)
-// l :::= List(3,2)		// prepends and return a new list
-// 3::list 				// prepends and return a new list
-// l = l.:::(List(100))	// prepends and return a new list
+var l = List(1,4,7)
+l :::= List(3,2)		// prepends and return a new list
+3::list 				// prepends and return a new list
+l = l.:::(List(100))	// prepends and return a new list
 
-// l.head
-// l.tail
-// l.length
+l.head
+l.tail
+l.length
 
-// List(1,2,4) == List(1,2,4)	// true
-// List() == NIl				// true
+List(1,2,4) == List(1,2,4)	// true
+List() == NIl				// true
 
-// val x1::x2::x3 = l
-// x1 = 1
-// x2 = 4
-// x3 = List(7)
+val x1::x2::x3 = l
+x1 = 1
+x2 = 4
+x3 = List(7)
 
 // Example 12. Loop contructs: Generators
-// val l = List((1, 2), (1, 4), (6, 7), (3, 6))
+val l = List((1, 2), (1, 4), (6, 7), (3, 6))
 
-// for (3 <- List(1, 3, 4, 3, 5, 3, 6, 3))  println("what?")
-// for (3 <- Range(1, 3))  println("what?")
-// for (3 <- Array(1, 3, 4, 3, 5, 3, 6, 3))  println("what?")
-// for (3 <- Set(1, 3, 4, 3, 5, 3, 6, 3))  println("what?")
-// for (3 <- 1 to 6)  println("what?")
+for (3 <- List(1, 3, 4, 3, 5, 3, 6, 3))  println("what?")
+for (3 <- Range(1, 3))  println("what?")
+for (3 <- Array(1, 3, 4, 3, 5, 3, 6, 3))  println("what?")
+for (3 <- Set(1, 3, 4, 3, 5, 3, 6, 3))  println("what?")
+for (3 <- 1 to 6)  println("what?")
 
-// for ( (1, j) <- l )  println(j) 			// only matches pairs starting with 1
+for ( (1, j) <- l )  println(j) 			// only matches pairs starting with 1
 
-// for (i <- 1 to 2; j <- 1 to 3) println("i = " + i + ", j = " + j)
+for (i <- 1 to 2; j <- 1 to 3) println("i = " + i + ", j = " + j)
 
-// for {
-// 	i <- 1 to 2
-// 	j <- 1 to 3
-// } println("i = " + i + ", j = " + j)
+for {
+	i <- 1 to 2
+	j <- 1 to 3
+} println("i = " + i + ", j = " + j)
 
 // Nested loops with filtering
-// for {
-// 	i <- 1 to 2 if i%2 == 0
-// 	j <- 1 to 3 if j%2 == 0
-// } println("i =" + i + ", j = " + j)
+for {
+	i <- 1 to 2 if i%2 == 0
+	j <- 1 to 3 if j%2 == 0
+} println("i =" + i + ", j = " + j)
 
-// val l = List((1,2),(1,4),(6,7),(3,6))
+val l = List((1,2),(1,4),(6,7),(3,6))
 
-// for ( (i, j) <- l if j == 2 * i )
-//	println((i, j))
-//
+for ( (i, j) <- l if j == 2 * i )
+	println((i, j))
 
-// def reverseList(x:List[Int]):List[Int] = {
-//	var l = List[Int]()
-//	for (h <- x)  l = h::l
-//	l
-// }
+
+def reverseList(x:List[Int]):List[Int] = {
+	var l = List[Int]()
+	for (h <- x)  l = h::l
+	l
+}
 
 // Example 13. Higher-order functions
 
